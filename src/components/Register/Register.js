@@ -4,33 +4,37 @@ class Register extends React.Component{
 		super(props);
 		this.state={
 			name:'',
-			password:'',
 			email:'',
+			password:'',
 		}
 	}
 	onNameChange = (event)=>{
 		this.setState({name:event.target.value});
+		//console.log('name',event.target.value);
 	}
 	onPasswordChange = (event)=>{
 		this.setState({password:event.target.value});
+		//console.log('pass',event.target.value);
 	}
 	onEmailChange = (event)=>{
 		this.setState({email:event.target.value});
+		//console.log('email',event.target.value);
 	}
 	onSubmitRegister = ()=>{
-		//console.log(this.state);
+		console.log(this.state);
 		fetch('http://localhost:3000/register',{
 			method:'post',
 			headers:{'Content-Type':'application/json'},
 			body:JSON.stringify({
 				email:this.state.email,
+				name:this.state.name,
 				password:this.state.password,
-				name:this.state.password,
 			})
 		})
 		.then(response => response.json())
 		.then(user=>{
 			if(user){
+				//console.log(user);
 				this.props.loadUser(user);
 				this.props.onRouteChange('home');
 			}
@@ -46,16 +50,16 @@ class Register extends React.Component{
 		       	    <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
 		       	      <legend className="f2 fw6 ph0 mh0">Register</legend>
 		       	      <div className="mt3">
-		       	        <label onChange={this.onNameChange} className="db fw6 lh-copy f6" htmlForm="Name">Name</label>
-		       	        <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="name"  id="name"/>
+		       	        <label  className="db fw6 lh-copy f6" htmlForm="Name">Name</label>
+		       	        <input onChange={this.onNameChange} className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="name"  id="name"/>
 		       	      </div>
 		       	      <div className="mt3">
-		       	        <label onChange={this.onEmailChange} className="db fw6 lh-copy f6" htmlForm="email-address">Email</label>
-		       	        <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address"  id="email-address"/>
+		       	        <label className="db fw6 lh-copy f6" htmlForm="email-address">Email</label>
+		       	        <input onChange={this.onEmailChange} className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address"  id="email-address"/>
 		       	      </div>
 		       	      <div className="mv3">
-		       	        <label onChange={this.onPasswordChange}className="db fw6 lh-copy f6" htmlForm="password">Password</label>
-		       	        <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password"  id="password"/>
+		       	        <label className="db fw6 lh-copy f6" htmlForm="password">Password</label>
+		       	        <input onChange={this.onPasswordChange} className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password"  id="password"/>
 		       	      </div>
 		       	      
 		       	    </fieldset>
