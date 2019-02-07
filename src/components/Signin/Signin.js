@@ -26,7 +26,7 @@ class Signin extends React.Component{
 		})
 		.then(response => response.json())
 		.then(user=>{
-			console.log(user);
+			//console.log(user);
 			if(user.id){
 				//console.log(this.state.signInPassword);
 				this.props.loadUser(user);
